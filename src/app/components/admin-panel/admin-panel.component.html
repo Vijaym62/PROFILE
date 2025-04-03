@@ -1,0 +1,54 @@
+<div class="admin-panel">
+  <mat-card>
+    <h2>{{ editingIndex === null ? "Add Profile" : "Edit Profile" }}</h2>
+    <form
+      [formGroup]="profileForm"
+      (ngSubmit)="editingIndex === null ? addProfile() : updateProfile()"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Image URL</mat-label>
+        <input matInput formControlName="image" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" required />
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="profileForm.invalid"
+      >
+        {{ editingIndex === null ? "Add" : "Update" }}
+      </button>
+    </form>
+  </mat-card>
+
+  <mat-card
+    *ngFor="let profile of profiles; let i = index"
+    class="profile-card"
+  >
+    <img [src]="profile.image" alt="{{ profile.name }}" class="profile-img" />
+    <h3>{{ profile.name }}</h3>
+    <p>{{ profile.description }}</p>
+    <p><strong>Address:</strong> {{ profile.address }}</p>
+    <button mat-raised-button color="accent" (click)="editProfile(i)">
+      Edit
+    </button>
+    <button mat-raised-button color="warn" (click)="deleteProfile(i)">
+      Delete
+    </button>
+  </mat-card>
+</div>

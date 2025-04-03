@@ -1,0 +1,19 @@
+<!-- If profile exists, display details -->
+<div
+  *ngIf="profile; else notFound"
+  class="p-4 border rounded-lg shadow-lg bg-white"
+>
+  <img
+    [src]="profile.image"
+    alt="{{ profile.name }}"
+    class="w-full h-48 object-cover rounded-md mb-4"
+  />
+  <h2 class="text-2xl font-bold mb-2">{{ profile.name }}</h2>
+  <p class="text-gray-600">{{ profile.description }}</p>
+  <p class="text-gray-500">{{ profile.address }}</p>
+</div>
+
+<!-- If profile not found, display message -->
+<ng-template #notFound>
+  <p class="text-red-500 text-center">Profile not found.</p>
+</ng-template>
